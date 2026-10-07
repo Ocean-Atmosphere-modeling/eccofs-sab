@@ -1,1 +1,32 @@
-MATLAB script for eccofs sub-domain
+MATLAB_script
+%% Add MATLAB tool path
+addpath('/Users/bensonossai/Desktop/MATLAB_TOOLS/roms_matlab/utility/');
+
+%% find grid domain to extract
+g=roms_get_grid('grid_eccofs_3km_08_b7_w3.nc');%this is the eccofs grid
+figure(1);
+pcolor(g.lon_rho,g.lat_rho,g.h);
+shading flat
+hold on
+x1=597;x2=998;y1=89;y2=618;%specify the sub-domain
+plot(g.lon_rho(:,x1),g.lat_rho(:,x1),'b','linewidth',2)
+plot(g.lon_rho(:,x2),g.lat_rho(:,x2),'b','linewidth',2)
+plot(g.lon_rho(y1,:),g.lat_rho(y1,:),'b','linewidth',2)
+plot(g.lon_rho(y2,:),g.lat_rho(y2,:),'b','linewidth',2)
+
+%extratct the sub-domain
+lon_box=g.lon_rho(y1:y2,x1:x2);
+lat_box=g.lat_rho(y1:y2,x1:x2);
+h_box=g.h(y1:y2,x1:x2);
+
+%plot extracted sub-domain
+figure(2);
+pcolor(lon_box,lat_box,h_box);
+shading flat
+hold on
+contour(lon_box,lat_box,h_box,[10 20 50 100 200 500 1000 2000],'k');
+colorbar;xlabel('lon');ylabel('lat');
+axis equal
+box on
+cmocean('deep');
+
