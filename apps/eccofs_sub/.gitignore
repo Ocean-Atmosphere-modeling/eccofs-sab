@@ -1,0 +1,33 @@
+# ROMS source / model files (not tracked here)
+roms/
+
+# Large data files
+*.nc
+
+# Jupyter auto-saves
+.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+
+# Mac system files
+.DS_Store
+
+# ROMS build products (created by Apps/*/build_roms.sh)
+Build_roms/
+Build_*/
+romsS
+romsM
+romsG
+romsO
+
+# Compiler intermediates
+*.o
+*.mod
+*.a
+
+# Model input/output data and run logs
+*.nc
+*.out
+*.log
+slurm-*.out
